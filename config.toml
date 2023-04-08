@@ -1,0 +1,4 @@
+baseURL = 'https://derpen.xyz/'
+languageCode = 'en-us'
+title = "dpn's stuff"
+theme = 'ananke'
