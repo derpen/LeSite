@@ -12,4 +12,4 @@ Will make a post of how to do this later.
 
 I also have this website hosted on my personal server.
 
-Visit at [baremetal.derpen.xyz](baremetal.derpen.xyz)
+Visit at [baremetal.derpen.xyz](https://baremetal.derpen.xyz)
