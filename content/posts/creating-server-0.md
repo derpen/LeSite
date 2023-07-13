@@ -32,7 +32,7 @@ Next, you would need to install a linux distro of your choice. Here, I will be u
 
 # Installing Arch
 
-Here, I'll tell you how to install Arch. If you don't plan on using Arch, you can skip this section and scroll down to the next part where we will be doing postinstall configuration (auto login without password and stop laptop from suspending whenenver lid is closed).
+Here, I'll tell you how to install Arch. If you don't plan on using Arch, you can skip this section and scroll down to the next part where we will be doing post install configuration (auto login without password and stop laptop from suspending whenenver lid is closed).
 
 Installing and using Arch is not an easy feat, but succesfully doing so would give you so much knowledge and insights on how linux system works. If you are just starting to learn linux, eventually, at some point in your life, you will learn to install Arch. It's an unavoidable pipeline, so might as well have it happen now, right? After this section, you can finall tell your friends, that you indeed, "use Arch btw".
 
@@ -88,18 +88,21 @@ Now we are rolling. Like with any other DIY distro, first step is to partition y
 {{< figure src="/images/baremetal/5.png" title="" >}}
 
 We got two drives, /dev/sda and /dev/sr0. I'm using a VM to demonstrate this, but most of the time, sda is the drive we want to install Arch on. You can infer which drive is which by the drive size. Now, we are going to partition it. We are going to run the fdisk command on /dev/sda
+```
+# fdisk /dev/sda
+```
 {{< figure src="/images/baremetal/6.png" title="" >}}
 
 There are several commands you want to do in fdisk. First of, the **d** command. This will delete the first partition it detects inside the drive. You would want to do this multiple times until there are no partitions left. Basically, just press d and enter again and again until you get this error.
 {{< figure src="/images/baremetal/7.png" title="" >}}
 
-Then, we can start making new partition. Generally, you would want three partition. One for boot, one for root, one for home, and optionally, one more for swap. Here, I will just create two. One for boot and one for home. We won't use an entire partition for swap, but instead just a file. We'll get to that later.
+Then, we can start making new partition. Generally, you would want three partition. One for boot, one for root, one for home, and optionally, one more for swap. Here, I will just create two. One for boot and one for root. We won't use an entire partition for swap, but instead just a file. We'll get to that later.
 
 For now, use the **n** command. This will create a new partition. It will prompt you to choose some stuff (partition type or whatever). You can just press enter again to choose the default. However, when it ask you for **Last Sector**, that's when we type something in. For the first partition, go ahead and type **+550M**. This will create a 550Mb partition. And then use **n** once more. This time, leave **Last Sector** empty. This will create a partition with the remaining drive size. To check if you did it properly, use the **p** command. You should now have two partition, /dev/sda1 and /dev/sda2.
 {{< figure src="/images/baremetal/8.png" title="" >}}
 {{< figure src="/images/baremetal/9.png" title="This is how it'll look" >}}
 
-Alrite, now we use the **w** command to write the changes. I don't think I need to say this again, but this **WILL DELETE THE DATA IN THAT DRIVE**. Afterwards, you can use lsblk again to inspect the drive. Remember, /dev/sda1 will be used for boot stuff, and /dev/sda2 will be for everything else.
+Alrite, now we use the **w** command to write the changes. I don't think I need to say this again, but this **WILL DELETE ALL DATA IN THAT DRIVE**. Afterwards, you can use lsblk again to inspect the drive. Remember, /dev/sda1 will be used for boot stuff, and /dev/sda2 will be for everything else.
 {{< figure src="/images/baremetal/10.png" title="" >}}
 
 Next, we will add a filesystem to the partition. We will add ext4 filesystem to /dev/sda2, and fat32 filesystem to /dev/sda1. Run these commands
@@ -114,7 +117,7 @@ If you are using non UEFI system, you would need to use ext4 aswell for /dev/sda
 ```
 If a bunch of output shows up, that means you are using UEFI. Any modern laptop, or any laptop created above the year 2013 should be UEFI by default, so realistically you don't really need to worry about this.
 
-Now, we wmount those filesystems. Use these commands
+Now, we mount those partitions. Use these commands
 ```
 # mount /dev/sda2 /mnt
 # mkdir /mnt/boot
@@ -122,9 +125,9 @@ Now, we wmount those filesystems. Use these commands
 ```
 {{< figure src="/images/baremetal/11.png" title="Aftermath" >}}
 
-Next, we will configure pacman, the package manager of Arch, and enable parallel downloading. I usually use **Vim**, but let's just use nano, a more beginner friendly text editor.
+Next, we will configure pacman, the package manager of Arch, and enable parallel downloading. I usually use **Vim** (😎), but let's just use nano, a more beginner friendly text editor.
 ```
-nano /etc/pacman.conf
+# nano /etc/pacman.conf
 ```
 Scroll down until you see the option of ParallelDownloads. By default, it's commented (there is a hash sign in front of the line), which means its turned off. Delete that hash sign, make sure there are no more leading whitespace, and change the number to however much you want. I usually go with 65. To save and quit in nano, you will need to press Ctrl+x, then press Y to confirm, then press enter to confirm again. You will need to do this again later btw.
 {{< figure src="/images/baremetal/12.png" title="" >}}
@@ -144,7 +147,6 @@ This command will create a new file in /mnt/etc/fstab. This file is read by the 
 Now, all this time, we've been running Arch from the installation media (the flashdisk). Now, we want to do changes directly inside the system that we have installed. Since we installed it in /mnt, we will change our root to there. To achieve that we use this command
 ```
 # arch-chroot /mnt
-
 ```
 
 We are now inside our Arch system. Couple of things that we want to do here.
@@ -159,19 +161,17 @@ We are now inside our Arch system. Couple of things that we want to do here.
 First of, configuring pacman. We will do the same thing earlier, where we edit pacman.conf. Previously we used nano as our text editor. Since we have moved to a fresh system, nano is not here anymore. We need to reinstall it. To install something using pacman, you would want to do
 ```
 # pacman -S package_name
-
 ```
-So, since we want to edit pacman.conf using nano, we are going to do
+So, since we want to edit pacman.conf using nano, the commands would be like so
 ```
 # pacman -S nano
 # nano /etc/pacman.conf
-
 ```
 Change the parallel download like we have done before. And now we would like to change our mirrors for faster download speed. Edit this file
 ```
 # nano /etc/pacman.d/mirrorlist
 ```
-In this file, hopefully servers for multiple region is already listed there. Your task here is to just rearrange the lines, so that regions closest (or at least, you think is closest) is on the very top of the file. You can just highlight the line you need by holding your shift key, cutting it with Ctrl+k, and then pasting with Ctrl+u.
+In this file, hopefully servers for multiple region is already listed there. Your task here is to just rearrange the lines, so that regions closest (or at least, you think is closest) is on the very top of the file. You can just highlight the line you need by holding your shift key, cutting it with Ctrl+k, and then pasting with Ctrl+u. In my case, I move the server url that has "asia" in it to the very top. 
 
 Once thats done, we are now changing our timezone. To see all available timezones, you do this
 ```
@@ -195,7 +195,7 @@ Next, we run
 # hwclock --systohc
 
 ```
-This will (as far as I'm concerned) use your current system clock that we just configured, and synchronize the hardware clock based on that (Yea im not sure either).
+This will (as far as I'm concerned) use your current system clock that we just configured, and synchronize the hardware clock based on that.
 
 Next, we are generating locale. This will tell the system what language we would want to use. For this, edit the /etc/locale.gen file
 ```
@@ -215,7 +215,7 @@ We are then required to edit /etc/hosts file. Open that guy with nano and edit i
 
 {{< figure src="/images/baremetal/14.png" title="" >}}
 
-Yes, that's a tab. Use tab. What does this file do you may ask? I don't fucking know honestly, I'm writing this at 1:08 AM, I'm not gonna bother researching what tf each line does. Figure it out yourself xd.
+Replace "baremetal" with whatever you just put earlier in /etc/hostname. Yes, that's a tab. Use tab. What does this file do you may ask? I don't fucking know honestly, I'm writing this at 1:08 AM, I'm not gonna bother researching what tf each line does. Figure it out yourself xd.
 
 Next up, setting up user. First off, we ran **passwd**
 ```
@@ -240,7 +240,7 @@ Next, configuring network.
 # pacman -S networkmanager
 # systemctl enable NetworkManager
 ```
-**systemctl enable NetworkManager** (make sure you type capitalized letter right) will enable the NetworkManager service. What this mean basically is that whenever you reboot your system, NetworkManager will be immediately be on. Kind of like startup applications in wind*ws.
+**systemctl enable NetworkManager** (make sure you type capitalized letter right) will enable the NetworkManager service. What this mean basically is that whenever you reboot your system, NetworkManager will be immediately be on. Kind of like startup applications in MicrosoftWind*ws.
 
 Before we go to the most important part, if you are installing on an ssd, you will want to enable trimming capability. This will increase your ssd lifetime.
 ```
@@ -252,7 +252,7 @@ Now we are ready to install our bootloader, the most important part of the syste
 # grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --boot-directory=/boot
 # grub-mkconfig -o /boot/grub/grub.cfg
 ```
-This is where problem might happen. Most likely happens because turns our your system is too old for UEFI. When this happens, I think you can just skip the 2nd command and go straight to **grub-mkconfig** (I'm not sure bruh). You will also need to format your boot partition as ext4 instead of fat32 like I have mentioned way way back. Oh well, good luck I guess xDD.
+This is where problem might happen. Most likely happens because turns our your system is too old for UEFI. When this happens, I think you have different parameters for **grub-install** (I'm not sure bruh). You will also need to format your boot partition as ext4 instead of fat32 like I have mentioned way way back. Oh well, good luck I guess xDD.
 
 If everything goes right, you should now have a completely capable Arch system ready to go.
 
@@ -265,11 +265,18 @@ Restart your system, and you should be able to login.
 
 {{< figure src="/images/baremetal/16.png" title="" >}}
 
-# PostInstall
+Finally, we need to reconnect to the Internet. If you are using wifi instead of ethernet, since now we are using NetworkManager, we now have different way of connecting to the internet (fucking tedious, ikr). It's pretty similiar to what we have done though, list all available network, connect to the SSID.
+```
+$ nmcli device wifi list
+$ nmcli device wifi connect SSID password password_here
+```
+And uh... that's pretty much it :3
 
-Hopefully by now, you now have an machine runnning Arch. If you do, congratulations! Otherwise, I'm very dissapointed Anyway, time to get two things configured now. Auto login without pass and stopping your laptop from suspending when lid is closed. We would want the device to automatically login whenever we power it on. This saves us the pain from having to relogin manually everytime you have a blackout in your home. Obviously you dont want to enable this if you have another person who knew how to use the command line in the vicinity. Plus systemd will run services at boot before you even login. For those reason, this step might be unnecessary for you, but it's handy nonetheless.
+# Post-Install
 
-If you are using wifi instead of ethernet, since now we are using NetworkManager, we now have different way of connecting to the internet.
+Hopefully by now, you now have an machine runnning Arch. If you do, congratulations! Otherwise, I'm very dissapointed Anyway, time to get two things configured now. Auto login without pass and stopping your laptop from suspending when lid is closed. 
+
+We would want the device to automatically login whenever we power it on. This saves us the pain from having to relogin manually everytime you have a blackout in your home. Obviously you dont want to enable this if you have another person who knew how to use the command line in the vicinity. Plus systemd will run services at boot before you even login. For those reason, this step might be unnecessary for you, but it's handy nonetheless.
 
 Next, if you are using laptop, you might prefer to have it running with the lid closed. 
 
