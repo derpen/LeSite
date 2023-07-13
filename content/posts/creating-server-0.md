@@ -4,7 +4,7 @@ date: 2023-07-11T16:26:39+07:00
 draft: true
 ---
 
-Let's turn your old and unused laptop/pc into a server.
+Let's turn your old and unused laptop/pc into a server that you can access from the Internet.
 
 Here, I will show you how to create a basic blog post, using just your laptop, and that trash default router provided by your ISP.  So this is practically a project you can do for free.
 
