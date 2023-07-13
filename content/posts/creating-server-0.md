@@ -1,7 +1,8 @@
 ---
 title: "Turning Your Old Laptop into a Bare Metal Server Part 0 - Getting Ready"
+tags: ["linux"]
 date: 2023-07-11T16:26:39+07:00
-draft: true
+draft: false
 ---
 
 Let's turn your old and unused laptop/pc into a server that you can access from the Internet.

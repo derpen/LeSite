@@ -1,6 +1,7 @@
 ---
 title: "Second Post"
 date: 2023-06-27T09:03:31+07:00
+featured_image: ""
 draft: false
 ---
 
