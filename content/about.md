@@ -1,4 +1,5 @@
 ---
+title: "About"
 description: "Greetings!"
 featured_image: '/images/resource/Puck_icon.webp'
 menu:

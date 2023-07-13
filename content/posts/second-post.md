@@ -11,6 +11,6 @@ Will make a post of how to do this later.
 
 # Update
 
-I also have this website hosted on my personal server.
+I also have this website hosted on my bare metal laptop server.
 
 Visit at [baremetal.derpen.xyz](https://baremetal.derpen.xyz)
