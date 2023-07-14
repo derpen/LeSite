@@ -56,6 +56,11 @@ $ hugo server -D --bind 192.168.100.7
 
 If you are running locally, you don't need to **--bind** and hugo will run on localhost:1313. If you are running it from external machine (like what we did here), we absolutely must add the **--bind** option (this took me an hour to figure out holyyyyy fuuuu). Replace ip with the ip of the your server. If my case, I can now access my site from a browser by going to 192.168.100.7:1313
 
+If you are using debian or the sorts, I think port 1313 is blocked by default. To open it, simply
+```
+# ufw allow 1313
+```
+
 {{< figure src="/images/baremetal/23.png" title="" >}}
 
 One last thing, you can just run hugo like so
