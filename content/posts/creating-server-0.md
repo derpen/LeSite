@@ -273,7 +273,7 @@ Next, we are going to create a swap file. This file will be used to store tempor
 ```
 $ sudo su
 ```
-And then run this command to actually create a swap file. We will name it **swapfile**, and put it in root (/) directory.
+And then run this command to actually create a swap file. We will name it **swapfile**, and put it in root (/) directory. This will create an 8Gb of swap. It's too overkill, but whatever.
 ```
 # dd if=/dev/zero of=/swapfile bs=1M count=8k status=progress
 ```
@@ -294,6 +294,7 @@ Lastly, edit **/etc/fstab**. We would need to put this line on the very bottom. 
 ```
 /swapfile none swap defaults 0 0
 ```
+Do take note though, usually its not adviceable to have a swap on an ssd, due to the amount of read and write process that can wear down our ssd. HOWEVER, we are only planning to use this as a static site server + 1 Jenkins instance. Swap will only be filled after your ram is full, and running a static site server + 1 Jenkins is extremely not demanding at all. All things considered, having swap is still a good idea as a kind of failsafe.
 
 Finally, we need to reconnect to the Internet. If you are using wifi instead of ethernet, since now we are using NetworkManager, we now have different way of connecting to the internet (fucking tedious, ikr). It's pretty similiar to what we have done though, list all available network, connect to the SSID.
 ```

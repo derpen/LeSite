@@ -34,9 +34,10 @@ To copy this file to your server the hot way, you can do something like this fro
 ```
 $ scp .ssh/id_rsa.pub derpen@192.168.100.7:
 ```
-Make sure you don't forget the colon at the end.
+Make sure you don't forget the colon at the end. Obviously, change the id_rsa to the file name, the user, and the ip to the one you had. This will copy the .pub key to the home directory of that user.
+# The Hardening part
 
-Obviously, change the id_rsa to the file name, the user, and the ip to the one you had. This will copy the .pub key to the home directory of that user. Now let's ssh to our server.
+Now let's ssh to our server.
 ```
 $ ssh derpen@192.168.100.7
 ```
@@ -45,7 +46,7 @@ Take a look at the your home directory using **ls**.
 
 {{< figure src="/images/baremetal/20.png" title="" >}}
 
-It has succesfully gets copied. Next, we need to take the content of this file in the proper place. The proper place is **.ssh/authorized_keys**. By default, the .ssh folder is not created yet. So let's do that, and afterwards, we move and rename our **id_rsa.pub** into **authorized_keys**.
+Our key has succesfully been copied. Next, we need to take the content of this file in the proper place. The proper place is **.ssh/authorized_keys**. By default, the .ssh folder is not created yet. So let's do that, and afterwards, we move and rename our **id_rsa.pub** into **authorized_keys**.
 ```
 $ mkdir .ssh
 $ mv ~/id_rsa.pub ~/.ssh/authorized_keys
@@ -60,7 +61,8 @@ There are couple of line you want to change
 - Set **PermitRootLogin** to no
 - Set **PubkeyAuthentication** to yes
 - Set **PasswordAuthentication** to no
-**Remember, if any of these settings is commented, remove the comments**
+
+**Remember, if any of these lines is commented, remove the comments**
 
 Optionally, you can change your port. This makes it harder for people to figure out which port your ssh is running on.
 
@@ -81,7 +83,7 @@ in Windows, its
 ```
 $ ssh -i %HOMEPATH%/.ssh/keyname derpen@192.168.100.7
 ```
-**Note: From this point on, I will keep using "~", Windows user needs to make sure they subtitute tilde to %HOMEPATH%**
+**Note: From this point onwards, I will keep using "~", Windows user needs to make sure they subtitute tilde to %HOMEPATH%**
 
 Second, since we disabled root login, make sure you are not trying to connect as root.
 ```
@@ -94,4 +96,4 @@ Thirldy, if you decided to change your ports, you also need to specify that port
 $ ssh -i ~/.ssh/keyname -p 6969 derpen@192.168.100.7
 ```
 
-And.. that's it basically. Your ssh is now gajilion times more secure. Nobody can brute force a password attack anymore, and even if they did, they won't logged in as root. Again, make sure you keep your private key very very very safe.
+The end. Your ssh is now gajilion times more secure. Nobody can brute force a password attack anymore, and even if they did, they won't logged in as root. Again, make sure you keep your private key very very very safe.
