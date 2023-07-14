@@ -33,7 +33,7 @@ Next, you would need to install a linux distro of your choice. Here, I will be u
 
 # Installing Arch
 
-Here, I'll tell you how to install Arch. If you don't plan on using Arch, you can skip this section and scroll down to the next part where we will be doing post install configuration (auto login without password and stop laptop from suspending whenenver lid is closed).
+Here, I'll tell you how to install Arch. If you don't plan on using Arch, you can skip this and scroll down to the next section where we will be doing post install configuration.
 
 Installing and using Arch is not an easy feat, but succesfully doing so would give you so much knowledge and insights on how linux system works. If you are just starting to learn linux, eventually, at some point in your life, you will learn to install Arch. It's an unavoidable pipeline, so might as well have it happen now, right? After this section, you can finall tell your friends, that you indeed, "use Arch btw".
 
@@ -266,6 +266,32 @@ Restart your system, and you should be able to login.
 
 {{< figure src="/images/baremetal/16.png" title="" >}}
 
+Next, we are going to create a swap file. This file will be used to store temporary data in the event that you ran out of memory space. This feature is also called page file. To create a swapfile, first go as root user.
+```
+$ sudo su
+```
+And then run this command to actually create a swap file. We will name it **swapfile**, and put it in root (/) directory.
+```
+# dd if=/dev/zero of=/swapfile bs=1M count=8k status=progress
+```
+Change the permission.
+```
+# chmod 0600 /swapfile
+```
+Partition it as swap.
+```
+# mkswap -U clear /swapfile
+```
+
+Activate the swap file.
+```
+# swapon /swapfile
+```
+Lastly, edit **/etc/fstab**. We would need to put this line on the very bottom. This will tell Arch to activate the swap on every reboot.
+```
+/swapfile none swap defaults 0 0
+```
+
 Finally, we need to reconnect to the Internet. If you are using wifi instead of ethernet, since now we are using NetworkManager, we now have different way of connecting to the internet (fucking tedious, ikr). It's pretty similiar to what we have done though, list all available network, connect to the SSID.
 ```
 $ nmcli device wifi list
@@ -275,10 +301,49 @@ And uh... that's pretty much it :3
 
 # Post-Install
 
-Hopefully by now, you now have an machine runnning Arch. If you do, congratulations! Otherwise, I'm very dissapointed Anyway, time to get two things configured now. Auto login without pass and stopping your laptop from suspending when lid is closed. 
+Hopefully by now, you have a machine runnning Arch. If you do, congratulations! Time to brag to your friends. Otherwise, I'm very dissapointed Anyway, time to get two things configured now. Auto login without pass and stopping your laptop from suspending when lid is closed. 
 
 We would want the device to automatically login whenever we power it on. This saves us the pain from having to relogin manually everytime you have a blackout in your home. Obviously you dont want to enable this if you have another person who knew how to use the command line in the vicinity. Plus systemd will run services at boot before you even login. For those reason, this step might be unnecessary for you, but it's handy nonetheless.
 
+---------------------------------- Under Construction -------------------------------
+
 Next, if you are using laptop, you might prefer to have it running with the lid closed. 
 
-If you are using a Desktop computer, you could just let it run headless, a.k.a. unplug the monitor and the keyboard. But don't do that yet, we still haven't installed SSH and configure it. In the next part we will go through the process of getting ssh ready so you can conveniently access your server from your main machine.
+---------------------------------- Under Construction -------------------------------
+
+Now, before we store our machine away. Let's at least get the bare minimum of ssh working on it. Ssh should be available by default, to see if it's available, run ssh
+```
+# ssh
+```
+As long the error is not within the lines of "command not found", then ssh is installed. In the event that it's not, run this to install ssh.
+```
+# pacman -S openssh
+```
+
+On distro with apt as package manager, you can do
+```
+# apt install openssh-server
+```
+
+And then, enable it
+```
+# systemctl enable sshd
+# systemctl start sshd
+```
+
+To check your machine local ip, you can do
+```
+# ip a
+```
+
+Bunch of stuff would show up, you would need to find your ip, it's either going to be the second or the third entry. In my case, it's the third
+
+------------------ add pic here --------------------------
+
+And now, the moment of truth, while still connected to the same network, you can finally connect to this machine from your main computer via ssh. By my surprise, ssh client actually comes by default in Windows 10, so this command should work on any platform, including MacOS. From your other computer, open either powershell, cmd, or a terminal, and then run ssh.
+```
+ssh derpen@192.168.100.7
+```
+Replace derpen with whatever user you just configured and replace the ip that matches yours. When prompted, type "yes", and then type your password. We can now control our server remotely using our main machine.
+
+Congratulations. If your server is a desktop, you can finally disconnect that monitor and keyboard. If it's a laptop, you can close the lid, store it under your desk or something, and make sure it's plugged in so whenever you got trolled by your electricity provider, it will automatically turn on without you having to manually press the button. In the next part, we will harden our ssh configuration.
