@@ -3,9 +3,12 @@ title: "Turning Your Old Laptop into a Bare Metal Server Part 0 - Getting Ready"
 tags: ["linux"]
 date: 2023-07-11T16:26:39+07:00
 draft: false
+featured_image: ""
 ---
 
 Let's turn your old and unused laptop/pc into a server that you can access from the Internet.
+
+{{< figure src="/images/baremetal/0.jpeg" title="" >}}
 
 Here, I will show you how to create a basic blog post, using just your laptop, and that trash default router provided by your ISP.  So this is practically a project you can do for free.
 
@@ -65,7 +68,7 @@ $ iwctl
 
 ```
 
-*Note: The command start after either the dollar sign, or the hash sign. I added that still just for clarity*
+*Note: The command start after either the dollar sign, or the hash sign. The dollar means the prompt is running as a normal user, while hash means that the prompt is running as root user. Keep that in mind*
 
 Basically, what those command does is
 ```
@@ -305,13 +308,41 @@ Hopefully by now, you have a machine runnning Arch. If you do, congratulations! 
 
 We would want the device to automatically login whenever we power it on. This saves us the pain from having to relogin manually everytime you have a blackout in your home. Obviously you dont want to enable this if you have another person who knew how to use the command line in the vicinity. Plus systemd will run services at boot before you even login. For those reason, this step might be unnecessary for you, but it's handy nonetheless.
 
----------------------------------- Under Construction -------------------------------
+To do this, you would need to edit this file.
+```
+# nano /etc/systemd/system/getty.target.wants/getty@tty1.service
+```
+If it does not exist, you need to create the file first. You can do this by doing these two commands.
+```
+# cp /usr/lib/systemd/system/getty@.service /etc/systemd/system/autologin@.service
+# ln -s /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+```
+Then inside the file, you need to change the line that reads **ExecStart**. Change it so it reads something like this.
+```
+ExecStart=-/sbin/agetty -a USERNAME %I 38400
+```
+Change USERNAME to whatever your username is. In my case I replace it with **derpen**. Quit and save the file. Now you need to reload the daemon and enable the service. Your machine will now be able to login automatically.
+```
+# systemctl daemon-reload
+# systemctl start getty@tty1.service
+```
+[Source](https://unix.stackexchange.com/questions/42359/how-can-i-autologin-to-desktop-with-systemd)
 
-Next, if you are using laptop, you might prefer to have it running with the lid closed. 
+Next, if you are using laptop, you might prefer to have it running with the lid closed. This one is even more simple. Edit this file
+```
+# nano /etc/systemd/logind.conf
+```
+Make sure the line that says **HandleLidSwitch** is on ignore.
 
----------------------------------- Under Construction -------------------------------
+{{< figure src="/images/baremetal/18.png" title="" >}}
 
-Now, before we store our machine away. Let's at least get the bare minimum of ssh working on it. Ssh should be available by default, to see if it's available, run ssh
+Reload the service to enable the changes immediately.
+```
+# systemctl restart systemd-logind
+```
+[Source](https://unix.stackexchange.com/questions/52643/how-to-disable-auto-suspend-when-i-close-laptop-lid)
+
+Now, before we store our machine away. Let's at least get the bare minimum of ssh working on it. Check if ssh is installed.
 ```
 # ssh
 ```
@@ -338,12 +369,15 @@ To check your machine local ip, you can do
 
 Bunch of stuff would show up, you would need to find your ip, it's either going to be the second or the third entry. In my case, it's the third
 
------------------- add pic here --------------------------
+{{< figure src="/images/baremetal/17.png" title="" >}}
 
 And now, the moment of truth, while still connected to the same network, you can finally connect to this machine from your main computer via ssh. By my surprise, ssh client actually comes by default in Windows 10, so this command should work on any platform, including MacOS. From your other computer, open either powershell, cmd, or a terminal, and then run ssh.
 ```
-ssh derpen@192.168.100.7
+ssh derpen@10.0.2.15
 ```
 Replace derpen with whatever user you just configured and replace the ip that matches yours. When prompted, type "yes", and then type your password. We can now control our server remotely using our main machine.
 
 Congratulations. If your server is a desktop, you can finally disconnect that monitor and keyboard. If it's a laptop, you can close the lid, store it under your desk or something, and make sure it's plugged in so whenever you got trolled by your electricity provider, it will automatically turn on without you having to manually press the button. In the next part, we will harden our ssh configuration.
+
+{{< figure src="/images/baremetal/19.jpg" title="" >}}
+{{< figure src="/images/baremetal/20.jpg" title="" >}}
