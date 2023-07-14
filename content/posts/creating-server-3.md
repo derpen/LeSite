@@ -64,7 +64,7 @@ But, this site is not yet enabled. For that, we need to create a symbolic link f
 ```
 {{< figure src="/images/baremetal/27.png" title="" >}}
 
-Cool, site is enabled. But we still have nothing in our /var/www/html directory. In fact, /www/html does not even exist! Let's create it first.
+Cool, site is enabled. But we still have nothing in our /var/www/html directory. In fact, at least on Arch, /www/html does not even exist! Let's create it first.
 ```
 # mkdir /var/www
 # mkdir /var/www/html
@@ -86,5 +86,11 @@ Nice, we got everything that we need there. The last step is to activate nginx i
 # systemctl start nginx
 ```
 Note: There is also a way to do this in one command xDDD
+
+Oh, and if you are using debian, as always, you need the firewall to enable the port. Let's enable port 80 and 443. Port 80 is used for http and 443 for https. Now, we don't have https yet, we are going to use a tool called certbot later to get free ssl for our web. Free stuff :o wowwwie~!!
+```
+# ufw allow 80
+# ufw allow 443
+```
 
 That should be all! You can now open the ip address of your server into your browser, and you should see your hugo server!
