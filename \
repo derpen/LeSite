@@ -86,7 +86,7 @@ Replace your **github project** with whatever is the url for your site. To save 
 
 Enable git for source code management. Put the url of your repository. The difference between this url and earlier url is now you just need to add .git in the end. Basically like how you git clone, if you are familiar with it.
 
-Make sure the branch points to main, because that's how git and github works now, we no longer uses "master".
+Make sure the branch points main, because that's how git and github works now, we no longer uses "master".
 
 I'm not sure if this next part is needed, someone should correct me. For the tricky part, credentials would be empty by default. You need to add one first.
 {{< figure src="/images/baremetal/45.png" >}}
@@ -94,7 +94,7 @@ I'm not sure if this next part is needed, someone should correct me. For the tri
 Put your github username on the username field. For the password? First, you need to go to your github settings, and go to the [tokens page.](https://github.com/settings/tokens) We will be creating our personal access tokens. I will generate a classic token. 
 {{< figure src="/images/baremetal/46.png" >}}
 
-Now for this part, I think you can just enable the repo part. But you can also be a lazy fuck and enable everything. Your choice. Your key will be shown after you confirm your choices. **MAKE SURE YOU KEEP THIS KEY VERY PROPERLY, THEY WON'T SHOW IT AGAIN (i believe)**.
+Now for this part, I think you can just enable the repo part. But you can also be a lazy fuck and enable everything. Your choice. Your key will not be shown. **MAKE SURE YOU KEEP THIS KEY VERY PROPERLY, THEY WON'T SHOW IT AGAIN (i believe)**.
 
 Okay, now go back to your jenkins, and on the password field, put your credentials in there.
 
@@ -116,7 +116,7 @@ Now, from your server, let's create a new site
 ```
 $ hugo new posts/second-post.md
 ```
-Edit it however you want, make sure to set draft to false, and then push the changes to our repository.
+Edit it however you want, and the push the changes to our repository.
 
 ```
 $ git add *
@@ -130,8 +130,8 @@ You can now see the build logs in your jenkins.
 
 If it fails, you can see what's going on from the console output in that logs. If it has something to do with permission, all you had to is to give jenkins permission to write into that directory.
 
-We did it bros and girls. Now we can focus on writing actual content on our blog post. And whenever you are done with it, you just push the changes to your git repository. You now have a baremetal server that you can brag to your friends, and life is good again.
+We did it bros and girls. Now we can focus on writing actual content on our blog post. And whenever you are done with it, you just push the changes to your git repository. You now have a baremetal server for blogging and life is good again.
 
 # Afterwords
 
-"What now", you may wonder. "What other stuff can I do in my server other than a static site?". Worry not my friend, for the possibilities are endless. You can use it as a personal email server, a personal file storage, and anything you want basically. I would recommend you visit [landchad.net](https://landchad.net/) on where to start (they use debian VPS there though, so some commands might be different!). Thanks for reading :3
+"What now", you may wonder. "What other stuff can I do in my server other than a static site?". Worry not my friend, for the possibilities are endless. You can use it as a personal email server, a personal file storage, and anything you want basically. I would recommend you can visit [landchad.net](https://landchad.net/) on where to start (they use debian VPS there though, so some commands might be different!).

@@ -30,7 +30,7 @@ Create two folders. In debian, these folders should be there by default.
 # mkdir sites-available
 # mkdir sites-enabled
 ```
-If you are using Arch, you need to modify **nginx.conf** to read sites-available folder (i have no idea why is this not enabled by default, i spent half and hour on this, like whyy?????). Add a line to include the sites-available folder.
+If you are using Arch, you need to modify **nginx.conf** to read sites-enabled folder (i have no idea why is this not enabled by default, i spent half and hour on this, like whyy?????). Add a line to include the sites-enabled folder.
 
 {{< figure src="/images/baremetal/26.png" title="" >}}
 
