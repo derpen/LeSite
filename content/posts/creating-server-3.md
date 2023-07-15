@@ -56,7 +56,7 @@ server {
         }
 }
 ```
-What this basically does, is to accept request that comes from the domain in server_name and http port. Then, it tries to find index file in /var/www/html. If it can't find it, it will return a 404. Sounds simple enough, right?
+Save and quit. What this basically does, is to accept request that comes from the domain in server_name and http port. Then, it tries to find index file in /var/www/html. If it can't find it, it will return a 404. Sounds simple enough, right?
 
 But, this site is not yet enabled. For that, we need to create a symbolic link from this file and put it into sites-enabled. You'll do something like this.
 ```
