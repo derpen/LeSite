@@ -36,7 +36,7 @@ Got your own domain name you can use? You can go to the dns panel of that domain
 
 {{< figure src="/images/baremetal/35.png" >}}
 
-Don't forget to configure your nginx properly.
+If you do this, don't forget to configure your nginx to point to that new domain.
 
 # Certbot
 
@@ -119,10 +119,10 @@ Add this to that file
 
 ip=$(curl checkip.dynu.com | awk '{print $4}')
 
-curl "http://api.dynu.com/nic/update?myip=$ip&myipv6=no&username=derpen&password=f0b7d69748bceb9a6271112931c6133b7f3aa1af2e832f84acf7622a3f45b46f"
+curl "http://api.dynu.com/nic/update?myip=$ip&myipv6=no&username=USERNAME&password=PASSWORD"
 ```
 
-Yes, you would want to include the first line that says **#!/bin/sh**. Don't leave that out. Save and quit.
+Yes, you would want to include the first line that says **#!/bin/sh**. Don't leave that out. Change USERNAME and PASSWORD accordingly. Save and quit.
 
 Now we need to  make it executable.
 ```
@@ -136,6 +136,6 @@ Lastly, we add this script to our cron. Add a second line to our **sudo crontab 
 ```
 * * * * * /home/derpen/update.sh
 ```
-Replace the directory with wherever directory you put your script in. What this tells cron is to run the script, every MINUTE. We would want our ip to be updated as quick as possible, so doing it every minute is necessary.
+Replace the directory with wherever directory you put your script in. What this tells cron is to run the script, every MINUTE. We would want our ip to be updated as quick as possible, so doing it every minute is necessary. To test if it works, restart your router, wait a minute, and check your dynu control panel to see if ip changes.
 
-Congratz, you got yourself, a proper domain. You can now access your machine, from the internet, using your domain, and not having to fear about not connecting to it (except me, I still have to fear about blackout, thanks PLN).
+Congratz, you got yourself, a proper domain. You can now access your machine, from the internet, using your domain, and not having to fear about not connecting to it (except me, I still have to fear about blackout, thanks PLN). In the next and final part, we will install and configure jenkins, so that our hugo site automatically gets updated whenever we push to our github.

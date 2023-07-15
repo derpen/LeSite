@@ -8,7 +8,7 @@ tags: ["linux"]
 
 # Engine-X
 
-Nginx (pronounced as engine-x) is how you turn your machine into a real server. What we will do with nginx is to basically allow a folder and a port for our user to access. Now, by default, every port in Arch is opened, so you don't have to worry about firewall and such. But any other distro need to care about firewall.
+Nginx (pronounced as engine-x) is how you turn your machine into a real server. What we will do with nginx is to basically allow a folder and a port for anyone to access. Now, by default, every port in Arch is opened, so you don't have to worry about firewall and such. But any other distro need to care about firewall.
 
 First, install nginx
 ```
@@ -25,12 +25,12 @@ Navigate to /etc/nginx
 # cd /etc/nginx
 ```
 
-Create two folders. In debian, these folders are already there.
+Create two folders. In debian, these folders should be there by default.
 ```
 # mkdir sites-available
 # mkdir sites-enabled
 ```
-If you are using Arch, you need to modify **nginx.conf** to read sites-available folder by default. Add a line to include the sites-available folder.
+If you are using Arch, you need to modify **nginx.conf** to read sites-available folder (i have no idea why is this not enabled by default, i spent half and hour on this, like whyy?????). Add a line to include the sites-available folder.
 
 {{< figure src="/images/baremetal/26.png" title="" >}}
 

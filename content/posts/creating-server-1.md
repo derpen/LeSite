@@ -95,5 +95,4 @@ Thirldy, if you decided to change your ports, you also need to specify that port
 ```
 $ ssh -i ~/.ssh/keyname -p 6969 derpen@192.168.100.7
 ```
-
-The end. Your ssh is now gajilion times more secure. Nobody can brute force a password attack anymore, and even if they did, they won't logged in as root. Again, make sure you keep your private key very very very safe.
+The end. Your ssh is now gajilion times more secure. Nobody can brute force a password attack anymore, and even if they did, they won't logged in as root. Again, make sure you keep your private key very very very safe. 

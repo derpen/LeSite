@@ -301,6 +301,22 @@ Finally, we need to reconnect to the Internet. If you are using wifi instead of 
 $ nmcli device wifi list
 $ nmcli device wifi connect SSID password password_here
 ```
+If you want, you can run a full system upgrade using pacman now (not like it matters, since every fresh install should already have the latest packages xd).
+```
+$ sudo pacman -Syu
+```
+**A note when using Arch, occasionally installing packages may fail. More often than not, that's because you are not synced to the latest package repos**
+
+For example, this might fail
+```
+$ sudo pacman -S something
+```
+A quick and very easy but annoying fix, is to append the **y** option. This will make sure to sync our local repos with remote repos before downloading anything.
+```
+$ sudo pacman -Sy something
+```
+This should now allow you to download without errors.
+
 And uh... that's pretty much it :3
 
 # Post-Install

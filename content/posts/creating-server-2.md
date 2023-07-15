@@ -27,9 +27,9 @@ $ git init
 $ git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
 $ echo "theme = 'ananke'" >> hugo.toml
 ```
-This will add a theme called ananke to your site. This is a very basic theme and is a good starting theme for noobs. You can inspect the content of **hugo.toml** if you want and play around with it.
+This will add a theme called ananke to your site. This is a very basic theme and is a good starting theme for noobs (us). You can inspect the content of **hugo.toml** if you want and play around with it.
 
-To create a page for our posts, we can do something like this. You will need to do something like this anytime you want to create a new post. You can change the file name anyhow you please.
+To create a page for our posts, we can do something like this. You will need to do something like this anytime you want to create a new post. You can change the directory and file name anyhow you please.
 ```
 $ hugo new posts/first-post.md
 ```
@@ -53,6 +53,7 @@ $ hugo server --buildDrafts --bind 192.168.100.7
 // or
 $ hugo server -D --bind 192.168.100.7
 ```
+Note: You still want to make sure to set draft to false later though, so keep that in mind.
 
 If you are running locally, you don't need to **--bind** and hugo will run on localhost:1313. If you are running it from external machine (like what we did here), we absolutely must add the **--bind** option (this took me an hour to figure out holyyyyy fuuuu). Replace ip with the ip of the your server. If my case, I can now access my site from a browser by going to 192.168.100.7:1313
 
@@ -69,9 +70,9 @@ $ hugo
 ```
 Hugo will automatically compile all your posts, and put it into the **public** directory (The directory is literally called public). When deploying your site, you will need to copy the contents of this directory into the root folder of your web server. We will get to this in the next part, where I explain the basics of Nginx.
 
-And, that's it. You can now focus on creating your site!
+And, that's it. You've learned how to create a static site!
 
-For more information on how to customize your site, you can visit hugo documentations [here.](https://gohugo.io/documentation/)
+For more information on how to customize your site, you can visit hugo documentations [here](https://gohugo.io/documentation/) and ananke theme docs [here.](https://github.com/theNewDynamic/gohugo-theme-ananke)
 
 # Uploading to Github
 
@@ -85,6 +86,7 @@ Then, assuming this is the first time you run git, run these commmands
 ```
 $ git remote add origin https:github.com/your_username/your_repo_name.git
 $ git branch -M main
+$ echo "public/*" >> .gitignore // We don't want this folder to be uploaded to our repo as well.
 $ git add *
 $ git commit -m "Initialize"
 $ git config --global user.email "your_email"
