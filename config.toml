@@ -2,3 +2,21 @@ baseURL = 'https://derpen.xyz/'
 languageCode = 'en-us'
 title = "dpn's stuff"
 theme = 'ananke'
+enableRobotsTXT = true
+SectionPagesMenu = "main"
+Paginate = 9
+ 
+[params]
+  text_color = ""
+  favicon = "/images/resource/Puck_minimap_icon.webp"
+  site_logo = "/images/resource/Puck_minimap_icon.webp"
+  description = "It's my personal web page :3"
+  disable_share = true
+ 
+[[params.ananke_socials]]
+  name = "linkedin"
+  url = "https://www.linkedin.com/in/muhammad-rizqi-assabil/"
+
+[[params.ananke_socials]]
+  name = "github"
+  url = "https://github.com/derpen"
