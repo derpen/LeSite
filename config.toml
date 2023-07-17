@@ -12,6 +12,10 @@ Paginate = 9
   site_logo = "/images/resource/Puck_minimap_icon.webp"
   description = "It's my personal web page :3"
   disable_share = true
+  date_format = "2 January 2006"
+#  body_classes = "monospace bg_near_white"
+#  post_content_classes = "helvetica bg_near_white"
+  post_content_classes = "helvetica bg_near_white"
  
 [[params.ananke_socials]]
   name = "linkedin"
