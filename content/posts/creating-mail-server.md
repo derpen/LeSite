@@ -25,11 +25,11 @@ This is also a continuation of my previous posts, where I demonstrate on how to 
 
 # Domain, Nginx, and SSL Preparation
 
-First, get a new domain for your machine. Make sure it points to the same ip as our original domain.
+First, get a new domain for your machine. Make sure it points to the same ip as our original domain. A bit reminder, **dynu free account won't allow you to create a txt record until your domain is at least 30 days old**. So, uh... come back in 30 days?
 
 {{< figure src="/images/mail/1.png" >}}
 
-The reason we are doing this, is because free dynu account are not allowed to create more than 4 dns records per domain, so if you plan to have multiple subdomains (blog, mail, etc), you won't have enough space. Thankfully 4 records are exactly the amount we need to create a mail server. Moreover, we can kinda just create a second domain that points to the same ip and dynu will just gladly accept it. So not only our first domain is free from extra dns entries, this also organizes our mail domains into one. Pretty cool eh. 
+Anyway, the reason we are creating a new domain, is because free dynu account are not allowed to create more than 4 dns records per domain, so if you plan to have multiple subdomains (blog, mail, etc), you won't have enough space. Thankfully 4 records are exactly the amount we need to create a mail server. Moreover, we can kinda just create a second domain that points to the same ip and dynu will just gladly accept it. So not only our first domain is free from extra dns entries, this also organizes our mail domains into one. Pretty cool eh. 
 
 Now add a dns record in that new domain. Right now we are just going to add an extra MX records. Go ahead and put your domain the hostname and "mail" as the node name.
 
@@ -69,6 +69,7 @@ First we run umask.
 ```
 umask 0022
 ```
+--------------- <+> Reminder to open ports in router ------------------
 
 
---------------- <+>Add github link -----------------
+--------------- <+> Add github link -----------------
