@@ -14,7 +14,7 @@ My router is a Huawei HG8245A that I got from my ISP. It's pretty shit, connecti
 
 By default, if you haven't set it up already, the default credential should be root and admin for user accountand password respectively. There is also the admintelecom trick (if you know you know (ytta)).
 
-If you want to see your public ip here, you can go to status page, see the ip address for the 2nd WAN entry.
+If you want to see your public ip here, you can go to status page, see the ip address for the 2nd WAN entry. If the ip start with a 10, for example 10.10.10.153, it means you have a private ip. A quick fix is to restart your router until your ip does not start with 10.
 
 {{< figure src="/images/baremetal/29.png" title="">}}
 
