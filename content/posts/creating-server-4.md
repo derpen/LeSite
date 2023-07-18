@@ -14,7 +14,7 @@ My router is a Huawei HG8245A that I got from my ISP. It's pretty shit, connecti
 
 By default, if you haven't set it up already, the default credential should be root and admin for user accountand password respectively. There is also the admintelecom trick (if you know you know (ytta)).
 
-If you want to see your public ip here, you can go to status page, see the ip address for the 2nd WAN entry.
+If you want to see your public ip here, you can go to status page, see the ip address for the 2nd WAN entry. If the ip start with a 10, for example 10.10.10.153, it means you have a private ip. A quick fix is to restart your router until your ip does not start with 10.
 
 {{< figure src="/images/baremetal/29.png" title="">}}
 
@@ -32,4 +32,4 @@ In the image above I have opened Port 80, but go ahead and do the same thing 3 m
 
 That's pretty much it! That's all we need to do to expose our ip to the Internet! Just like how my imaginary gf described it, "quick and dissapointing", but now you can put your public ip address to the browser and see your website running! 
 
-There is also problem with private ip and public ip depending on your ISP, something like [this.](https://www.uplotify.id/cara-dapat-ip-public-indihome/). One solution is to keep restarting your router until you got a public ip. But I have restarted my router for like 52738942349 time, and I never once get a private ip. So maybe it depends on your internet plan?? I'm not sure tbh, I'm not gonna cover a case I can't try, but ehhh, good luck!
+There is also problem with private ip and public ip depending on your ISP, something like [this.](https://www.uplotify.id/cara-dapat-ip-public-indihome/). One solution is to keep restarting your router until you got a public ip. But I have restarted my router for like 52738942349 time, and I never once get a private ip (Nevermind, it immediately happens right when I write this). You can try to write a script to restart your router until it detects a public ip (I'm not sure how, good luck!).
