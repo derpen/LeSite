@@ -63,7 +63,12 @@ Then, we rerun certbot
 ```
 # certbot --nginx
 ```
-Choose both of your mail server domain. Accept, and let it run. We now have a certificate for this domain.
+Choose both of your mail server domain. Accept, and let it run. We now have a certificate for this domain. Next is start installing stuff.
+
+First we run umask.
+```
+umask 0022
+```
 
 
 --------------- <+>Add github link -----------------

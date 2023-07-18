@@ -39,7 +39,7 @@ We can now start adding a configuration for our site in the sites-available fold
 # nano sites-available/site
 ```
 Here is a simple default configuration to get you working.
-```
+```nginx
 server {
 
         listen 80 ;
