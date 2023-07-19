@@ -11,6 +11,8 @@ Just use this script xd.
 
 [Luke Smiths email server setup script.](https://github.com/LukeSmithxyz/emailwiz)
 
+{{< youtube 9zP7qooM4pY >}}
+
 # Anything Else (Arch Linux specifically) User.
 
 This is where the real fun begins :)
@@ -25,7 +27,7 @@ This is also a continuation of my previous posts, where I demonstrate on how to 
 
 # Domain, Nginx, and SSL Preparation
 
-First, get a new domain for your machine. Make sure it points to the same ip as our original domain. A bit reminder, **dynu free account won't allow you to create a txt record until your domain is at least 30 days old**. So, uh... come back in 30 days?
+First, get a new domain for your machine. Make sure it points to the same ip as our original domain. A bit reminder, **dynu free account won't allow you to create a txt record until your domain is at least 30 days old**. So, uh... come back soon?
 
 {{< figure src="/images/mail/1.png" >}}
 

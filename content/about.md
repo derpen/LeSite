@@ -19,7 +19,7 @@ I specialize in Linux systems, specifically
 - Some knowledge of linux security best practices
 - Being good at the command line in general
 
-I have also successfully installed Gentoo to a bare metal machine at one point.
+I have also successfully installed Gentoo to a bare metal machine at one point :D
 
 It's been roughly 3 years since I last switch fulltime to linux (Arch btw). If you need a DevOps or a Sysadmin guy, hit me up :3
 
