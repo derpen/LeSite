@@ -19,6 +19,8 @@ Once you are logged in, go to add dynamic dns page [here.](https://www.dynu.com/
 The IP address for that domain should be automatically filled by dynu. Now you can access your server using this domain provided by dynu!
 {{< figure src="/images/baremetal/33.png" >}}
 
+**A bit of note if you are planning to create a mail server with dynu, free accounts need to wait until their domain is 30 days old before you can set the TXT record. So do plan ahead.**
+
 When accessing your domain for the first time, you should see a blank/error nginx page. That's because we haven't told our nginx server what domain it should look for. Go ahead and ssh into your machine, and change a couple of lines in your sites-available file.
 ```
 $ ssh derpen@yourdomain // you can use your domain now!
