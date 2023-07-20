@@ -9,4 +9,4 @@ menu: main
 Got question? Find a flaw in something I wrote?
 
 Email me at:
-rizqyassabil@hotmail.com
+mailme@derpen.xyz
