@@ -45,4 +45,4 @@ Before releasing this blog, I will make sure to retry everything again, on diffe
 
 Oh, btw, google is so shit nowadays. I lost count on how many AI generated articles I stumbled upon that is basically just chatgpt answering "explain me the X library" without giving me actual example on how to use said library. I might switch to duckduckgo from now on.
 
-In the end, I think I'll go back to tensorflow. I could have spent my weekend at learning pytorch instead, but oh well, wcyd.
+In the end, I think I'll go back to tensorflow. I could have spent my weekend at learning pytorch instead, but oh well, wcyd..
