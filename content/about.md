@@ -10,21 +10,4 @@ menu:
 
 {{< greetings >}} Greetings!
 
-I'm Muhammad Rizqi Assabil
-
-I specialize in Linux systems, specifically 
-- Automation
-- Troubleshooting
-- Increasing productivity with various shell scripts, wm hotkeys, and open source applications
-- Some knowledge of linux security best practices
-- Being good at the command line in general
-
-I have also successfully installed Gentoo to a bare metal machine at one point :D
-
-It's been roughly 3 years since I last switch fulltime to linux (Arch btw). If you need a DevOps or a Sysadmin guy, hit me up :3
-
-I also have interests in Machine Learning field, Data Science/Analytics world, and I'm also capable of creating backend for applications.
-
-One last thing, I also have this site hosted on my baremetal machine. Do come visit ^^ (If it's down, you can blame PLN)
-
-[baremetal.derpen.xyz](https://baremetal.derpen.xyz)
+Currently figuring out what I want to do :3
